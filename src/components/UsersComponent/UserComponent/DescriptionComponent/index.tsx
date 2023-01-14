@@ -5,7 +5,7 @@ import { UserInterface } from "../../../../models/User/UserInterface";
 /**
  * Composant dédié à l'affichage du description de l'utilisateur
  */
-export default (user: UserInterface) => {
+export default function UserDescription (user: UserInterface) {
   return (
     <div id="UserComponent-Description">
       <div className="description">

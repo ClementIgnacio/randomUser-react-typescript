@@ -13,7 +13,7 @@ interface PropsType {
 /**
  * Composant dédié à l'affichage d'un utilisateur
  */
-export default ({ user, active, index, setActiveCard }: PropsType) => {
+export default function UserCard({ user, active, index, setActiveCard }: PropsType) {
   /**
    * Handler associé à un click sur une carte
    * @param {MouseEvent:<HTMLDivElement>} event L'événement

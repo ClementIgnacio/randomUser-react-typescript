@@ -7,7 +7,7 @@ interface PropsType {
   user: UserInterface;
   active: boolean;
   index: number;
-  setActiveCard: Function;
+  setActiveCard: (index: number) => void;
 }
 
 /**

@@ -26,7 +26,7 @@ export default function UserCard({ user, active, index, setActiveCard }: PropsTy
   return (
     <div
       id="UserComponent-User"
-      className={`card ${active && "active : true"}`}
+      className={`card ${active ? "active" : ""}`}
       onClick={handleClick}
     >
       <DescriptionComponent {...user} />

@@ -1,49 +1,42 @@
 import { useEffect, useContext, useCallback } from "react";
-import User from "../models/User";
 import { UsersContext } from "../context/UsersContext";
 import { UserInterface } from "../models/User/UserInterface";
 import { RANDOM_USER_BASE_URL } from "../utils/api";
 
-interface ReturnType {
-  users: UserInterface[];
-  fetchRandomUsers: Function;
-}
-
-interface PropsType {
+interface UseUsersOptions {
   init?: boolean;
 }
 
 /**
  * Hook de gestion des utilisateurs
  */
-export default (options: PropsType = { init: false }): ReturnType => {
+export default function useUsers(options: UseUsersOptions = { init: false }) {
   const { users, setUsers } = useContext(UsersContext);
 
-  /**
-   * Méthode permettant l'obtention de users
-   * @param {number} nbResults[3] Le nombre de résultats à chercher
-   */
-  const fetchRandomUsers = useCallback(
-    (nbResults: number = 3) =>
-      fetch(`${RANDOM_USER_BASE_URL}/?results=${nbResults}`).then((response) =>
-        response.json().then((data) => {
-          const newUsers = data.results.map(
-            (user: UserInterface) => new User(user)
-          );
-          setUsers(newUsers);
-        })
-      ),
-    [setUsers]
-  );
+/**
+ * Méthode permettant l'obtention de users
+ * @param {number} nbResults[3] Le nombre de résultats à chercher
+ */
+const fetchRandomUsers = useCallback(
+  async (nbResults: number = 3) => {
+    const url = new URL(RANDOM_USER_BASE_URL)
+    url.searchParams.set('results', nbResults.toString())
+    const response = await fetch(url.toString())
+    const users: UserInterface[] = (await response.json()).results
 
-  /**
-   *  Mise à jour initiale de la variable users
-   */
-  useEffect(() => {
-    if (users.length === 0 && options?.init === true) {
-      fetchRandomUsers(3);
-    }
-  }, [users, options, fetchRandomUsers]);
+    setUsers(users)
+  },
+  [setUsers]
+);
 
-  return { users, fetchRandomUsers };
+/**
+ *  Mise à jour initiale de la variable users
+ */
+useEffect(() => {
+  if (users.length === 0 && options?.init === true) {
+    fetchRandomUsers(3);
+  }
+}, [users, options, fetchRandomUsers]);
+
+return { users, fetchRandomUsers };
 };

@@ -10,7 +10,7 @@ export type UserNameInterface = {
   title: string;
   first: string;
   last: string;
-  getName: Function;
+  getName: () => string;
 };
 
 export type StreetInterface = {

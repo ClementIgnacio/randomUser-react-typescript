@@ -10,7 +10,7 @@ interface ReturnType {
 }
 
 interface PropsType {
-  init: boolean;
+  init?: boolean;
 }
 
 /**

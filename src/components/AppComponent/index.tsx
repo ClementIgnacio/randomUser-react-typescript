@@ -5,7 +5,7 @@ import HeaderComponent from "../HeaderComponent";
 /**
  * Composant principal de l'application
  */
-export default () => {
+export default function App () {
   return (
     <div className="App">
       <HeaderComponent />

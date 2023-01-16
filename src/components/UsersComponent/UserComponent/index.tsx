@@ -7,13 +7,13 @@ interface PropsType {
   user: UserInterface;
   active: boolean;
   index: number;
-  setActiveCard: Function;
+  setActiveCard: (index: number) => void;
 }
 
 /**
  * Composant dédié à l'affichage d'un utilisateur
  */
-export default ({ user, active, index, setActiveCard }: PropsType) => {
+export default function UserCard({ user, active, index, setActiveCard }: PropsType) {
   /**
    * Handler associé à un click sur une carte
    * @param {MouseEvent:<HTMLDivElement>} event L'événement
@@ -26,7 +26,7 @@ export default ({ user, active, index, setActiveCard }: PropsType) => {
   return (
     <div
       id="UserComponent-User"
-      className={`card ${active && "active : true"}`}
+      className={`card ${active ? "active" : ""}`}
       onClick={handleClick}
     >
       <DescriptionComponent {...user} />

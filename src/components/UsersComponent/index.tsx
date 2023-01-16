@@ -6,7 +6,7 @@ import useUsers from "../../hooks/useUsers";
 /**
  * Composant dédié à l'affichage des utilisateurs
  */
-export default () => {
+export default function  Users () {
   const [active, setActive] = useState<number>(1);
   const { users } = useUsers({ init: true });
 

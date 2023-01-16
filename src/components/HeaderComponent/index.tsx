@@ -4,7 +4,7 @@ import "./style.css";
 /**
  * Composant dédié au Header
  */
-export default () => {
+export default function Header () {
   const { fetchRandomUsers } = useUsers();
 
   return (
